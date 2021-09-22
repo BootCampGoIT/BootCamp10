@@ -1,0 +1,1 @@
+const headerListItems = ["Home", "Courses", "About us"];

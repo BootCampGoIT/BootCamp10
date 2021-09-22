@@ -1,2 +1,15 @@
 # BootCamp10
-Lessons
+
+**Components:**
+- function
+- class
+
+<h1>Hello</h1>
+
+```javascript
+
+const x = 10;
+function getX(){
+
+}
+```
