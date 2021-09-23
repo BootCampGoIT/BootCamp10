@@ -2,7 +2,6 @@ import React from "react";
 
 const Header = ({ list }) => {
   return (
-    <>
       <header>
         <a href='http://'>Logo</a>
         <nav>
@@ -15,7 +14,6 @@ const Header = ({ list }) => {
           </ul>
         </nav>
       </header>
-    </>
   );
 };
 
