@@ -1,0 +1,31 @@
+.sectionTitle {
+  color: green;
+}
+
+.border {
+  border: 1px solid cornflowerblue;
+  border-radius: 16px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.border:hover {
+  border: 1px solid red;
+  cursor: pointer;
+}
+
+.newGround {
+  composes: border;
+  background-color: tomato;
+}
+
+.darkBorder {
+  composes: border;
+  background-color: black;
+  color: white;
+}
+.lightBorder {
+  composes: border;
+  background-color: white;
+  color: black;
+}

@@ -1,19 +1,13 @@
 import React from "react";
+import { mainRoutes } from "../../routes/mainRoutes";
+import Navigation from "../navigation/Navigation";
 
-const Header = ({ list }) => {
+const Header = () => {
   return (
-      <header>
-        <a href='http://'>Logo</a>
-        <nav>
-          <ul>
-            {list.map((listItem) => (
-              <li key={listItem}>
-                <a href='#'>{listItem}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
+    <header>
+      <a href='http://'>Logo</a>
+      <Navigation routes={mainRoutes} />
+    </header>
   );
 };
 

@@ -1,10 +1,13 @@
-const Section = ({ title, children }) => {
+import styles from "./Section.module.css";
+
+const Section = (props) => {
+  const { title, children, theme = "light" } = props;
+
   return (
-    <section>
-      <hr />
-      <h2>{title}</h2>
+    <section
+      className={theme === "dark" ? styles.darkBorder : styles.lightBorder}>
+      <h2 className={styles.sectionTitle}>{title}</h2>
       {children}
-      <hr />
     </section>
   );
 };
