@@ -1,13 +1,16 @@
 import React from "react";
 import { mainRoutes } from "../../routes/mainRoutes";
 import Navigation from "../navigation/Navigation";
+import { HeaderContainer } from "./HeaderStyled";
 
 const Header = () => {
   return (
-    <header>
-      <a href='http://'>Logo</a>
+    <HeaderContainer>
+      <a href='/#' className='headerLogo'>
+        ITED
+      </a>
       <Navigation routes={mainRoutes} />
-    </header>
+    </HeaderContainer>
   );
 };
 

@@ -11,19 +11,19 @@ const App = () => {
 
   return (
     <>
-      <button
-        type='button'
-        onClick={() =>
-          setCurrenTheme(
-            currentTheme.title === "dark" ? themes.light : themes.dark
-          )
-        }>
-        Change Theme
-      </button>
       <ThemeProvider theme={currentTheme}>
         <GlobalStyles />
         <Header />
         <Main courses={courses} />
+        <button
+          type='button'
+          onClick={() =>
+            setCurrenTheme(
+              currentTheme.title === "dark" ? themes.light : themes.dark
+            )
+          }>
+          Change Theme
+        </button>
       </ThemeProvider>
     </>
   );
