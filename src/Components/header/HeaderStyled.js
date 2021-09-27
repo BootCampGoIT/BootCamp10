@@ -15,4 +15,34 @@ export const HeaderContainer = styled.header`
     font-size: 24px;
     font-weight: 700;
   }
+  .navigationWrapper {
+    display: flex;
+    align-items: center;
+  }
+  .headerThemeButton {
+    margin-left: 20px;
+  }
+  .headerSettingsBlock {
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    &:hover {
+      border-radius: 50%;
+      background-color: ${({ theme }) => theme.colors.secondary};
+    }
+  }
+  .headerSettings {
+    width: 25px;
+    height: 25px;
+    fill: ${({ theme }) => theme.colors.main};
+  }
+
+  .headerModalSettingsWrapper {
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+  }
 `;

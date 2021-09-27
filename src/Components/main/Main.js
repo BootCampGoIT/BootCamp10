@@ -6,9 +6,9 @@ import Section from "../section/Section";
 const Main = ({ courses }) => {
   return (
     <main>
-      <Section title='CourseForm'>
+      {/* <Section title='CourseForm'>
         <CoursesForm />
-      </Section>
+      </Section> */}
 
       <Section title='CourseList'>
         <CoursesList courses={courses} />
