@@ -4,6 +4,7 @@ import CoursesListItem from "./coursesListItem/CoursesListItem";
 import { CourseListItemContainer } from "./coursesListItem/CoursesListItemStyled";
 import Modal from "../modal/Modal";
 import CoursesForm from "./coursesForm/CoursesForm";
+import PropTypes from "prop-types";
 
 class CoursesList extends Component {
   state = {
@@ -11,9 +12,9 @@ class CoursesList extends Component {
     courses: this.props.courses,
   };
 
-  addCourse = (course) => {
+  addCourse = (item) => {
     this.setState((prev) => ({
-      courses: [...prev.courses, course],
+      courses: [...prev.courses, item],
       isCourseFormOpen: false,
     }));
   };
@@ -51,17 +52,9 @@ class CoursesList extends Component {
   }
 }
 
+CoursesList.propTypes = {
+  courses: PropTypes.arrayOf(PropTypes.object),
+};
+
 export default CoursesList;
 
-// function printName() {
-//   console.log(this); //undefined
-//   console.log(this.name);
-// }
-
-// const obj = {
-//   name: "Alex",
-//   printName,
-// };
-
-// const getName = printName.bind(obj);
-// getName()//Alex
