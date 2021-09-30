@@ -15,6 +15,11 @@ export const HeaderContainer = styled.header`
     font-size: 24px;
     font-weight: 700;
   }
+  .headerBurgerMenu {
+    width: 40px;
+    height: 40px;
+    fill: ${({ theme }) => theme.colors.main};
+  }
   .navigationWrapper {
     display: flex;
     align-items: center;
@@ -44,5 +49,10 @@ export const HeaderContainer = styled.header`
     background-color: white;
     padding: 20px;
     border-radius: 16px;
+  }
+  .headerModalWrapper {
+    background-color: ${({ theme }) => theme.colors.secondary};
+    width: 100%;
+    height: 100%;
   }
 `;

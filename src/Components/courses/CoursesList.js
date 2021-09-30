@@ -9,8 +9,12 @@ import PropTypes from "prop-types";
 class CoursesList extends Component {
   state = {
     isCourseFormOpen: false,
-    courses: this.props.courses,
+    courses: [...this.props.courses],
   };
+
+  componentDidMount() {
+    // axios.get(`https://`)
+  }
 
   addCourse = (item) => {
     this.setState((prev) => ({
@@ -57,4 +61,3 @@ CoursesList.propTypes = {
 };
 
 export default CoursesList;
-

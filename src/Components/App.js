@@ -9,8 +9,16 @@ import GroupsForm from "./groups/GroupsForm";
 
 class App extends Component {
   state = {
-    theme: "dark",
+    theme: JSON.parse(localStorage.getItem("theme")) || "dark",
+    x: 0,
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    localStorage.setItem("theme", JSON.stringify(this.state.theme));
+    if (prevState.theme !== this.state.theme) {
+      this.setState((prev) => ({ x: (prev.x += 1) }));
+    }
+  }
 
   changeTheme = () => {
     this.setState((prev) => ({

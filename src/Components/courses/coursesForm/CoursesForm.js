@@ -1,25 +1,6 @@
 import React from "react";
 import { CourseFormContainer } from "./CoursesFormStyled";
 
-// const course = {
-//   id: "",
-//   name: "Html",
-//   descrption: "xfghjkl",
-//   image: "",
-//   duration: 30,
-//   modules: [
-//     {
-//       name: "lesson1. Arrays",
-//       webinar: "https",
-//       reference: "https://",
-//     },
-//     {
-//       name: "lesson1. Arrays",
-//       webinar: "https",
-//       reference: "https://",
-//     },
-//   ],
-// };
 
 const CoursesForm = () => {
   return (

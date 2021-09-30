@@ -47,8 +47,17 @@ class GroupsForm extends Component {
 
   onHandleSubmit = (e) => {
     e.preventDefault();
-    this.props.addGroup({ ...this.state, id: uuidv4() });
-    this.setState({ ...initialState });
+    axios
+      .post(
+        `https://ited-fc7ac-default-rtdb.firebaseio.com/groups.json`,
+        this.state
+      )
+      .then((res) => this.props.addGroup({ ...this.state, id: res.data.name }))
+      .catch((err) => console.log(err))
+      .finally(() => this.setState({ ...initialState }));
+    // this.props.addGroup({ ...this.state, id: uuidv4() });
+
+    // get, post, put, patch, delete
   };
 
   toDataURL = (element) => {
