@@ -12,8 +12,15 @@ export const GroupFormContainer = styled.div`
   }
   .groupFormAvatarImage {
   }
+  .groupFormAvatarIcon {
+    width: 40px;
+    height: 40px;
+    fill: currentColor;
+  }
   .groupFormAvatarLabel {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     width: 100px;
     height: 100px;
@@ -21,6 +28,15 @@ export const GroupFormContainer = styled.div`
     border-radius: 16px;
     margin: 0 auto;
     overflow: hidden;
+    color: ${(props) => props.theme.colors.main};
+    transition: all 300ms linear;
+
+    &:hover {
+      background-color: ${(props) => props.theme.colors.active};
+    }
+    &:hover .groupFormAvatarIcon {
+      fill: ${(props) => props.theme.colors.secondary};
+    }
   }
   .groupFormAvatarInput {
     display: none;
@@ -64,7 +80,6 @@ export const GroupFormContainer = styled.div`
     width: 15px;
     height: 15px;
     cursor: pointer;
-    
   }
   .groupFormActiveGroupTitle {
     margin-right: 10px;

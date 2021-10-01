@@ -5,6 +5,8 @@ import CoursesForm from "../courses/coursesForm/CoursesForm";
 import CoursesList from "../courses/CoursesList";
 import GroupsForm from "../groups/groupsForm/GroupsForm";
 import GroupsList from "../groups/groupsList/GroupsList";
+import Modal from "../modal/Modal";
+import AddItem from "../reusableComponents/addItem/AddItem";
 
 import Section from "../section/Section";
 import TutorForm from "../tutors/tutorForm/TutorForm";
@@ -18,6 +20,11 @@ class Main extends Component {
     tutors: [],
     error: "",
     isLoading: false,
+    isGroupFormOpen: false,
+  };
+
+  toggleGroupForm = () => {
+    this.setState((prev) => ({ isGroupFormOpen: !prev.isGroupFormOpen }));
   };
 
   addNewTutor = async (tutor) => {
@@ -93,7 +100,6 @@ class Main extends Component {
           <CoursesList courses={this.state.courses} />
         </Section>
 
-        <GroupsForm addGroup={this.addGroup} tutors={this.state.tutors} />
         <hr />
         <label>
           Filter:
@@ -106,8 +112,18 @@ class Main extends Component {
         <hr />
         <GroupsList
           groups={this.getFilteredGroups()}
-          deleteGroup={this.deleteGroup}
-        />
+          deleteGroup={this.deleteGroup}>
+          <AddItem openForm={this.toggleGroupForm} />
+        </GroupsList>
+        {this.state.isGroupFormOpen && (
+          <Modal toggleModal={this.toggleGroupForm}>
+            <GroupsForm
+              addGroup={this.addGroup}
+              tutors={this.state.tutors}
+              closeForm={this.toggleGroupForm}
+            />
+          </Modal>
+        )}
       </main>
     );
   }

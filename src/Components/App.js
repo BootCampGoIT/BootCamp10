@@ -9,7 +9,6 @@ import themes from "../themes";
 class App extends Component {
   state = {
     theme: JSON.parse(localStorage.getItem("theme")) || "dark",
-    x: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {

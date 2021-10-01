@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { GroupFormContainer } from "./GroupFormStyled";
+import sprite from "../../../icons/main/sprite.svg";
 
 const students = ["Alex Ivanov", "Nikita Petrov", "Andrii Shnurkov"];
 
@@ -28,9 +29,11 @@ class GroupsForm extends Component {
         `https://ited-fc7ac-default-rtdb.firebaseio.com/groups.json`,
         this.state
       )
-      .then((res) => this.props.addGroup({ ...this.state, id: res.data.name }))
-      .catch((err) => console.log(err))
-      .finally(() => this.setState({ ...initialState }));
+      .then((res) => {
+        this.props.addGroup({ ...this.state, id: res.data.name });
+        this.props.closeForm();
+      })
+      .catch((err) => console.log(err));
   };
 
   toDataURL = (element) => {
@@ -75,7 +78,13 @@ class GroupsForm extends Component {
         <form onSubmit={this.onHandleSubmit} className='groupsForm'>
           <div className='groupFormAvatarImage'>
             <label className='groupFormAvatarLabel'>
-              {this.state.avatar && <img src={this.state.avatar} alt='pic' />}
+              {this.state.avatar ? (
+                <img src={this.state.avatar} alt='pic' />
+              ) : (
+                <svg className='groupFormAvatarIcon'>
+                  <use href={sprite + "#icon-camera"} />
+                </svg>
+              )}
               <input
                 type='file'
                 name='avatar'

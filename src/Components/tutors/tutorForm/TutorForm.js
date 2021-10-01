@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { TutorFormContainer } from "./TutorFormStyled";
+import sprite from "../../../icons/main/sprite.svg";
 
 const levels = ["junior", "middle", "senior"];
 const experience = ["1 year", "3 years", "5 years"];
@@ -24,7 +25,9 @@ class TutorForm extends Component {
   onHandleChange = (e) => {
     const { type, value, name } = e.target;
     if (type === "file") {
-      toDataURL(e.target).then((avatar) => this.setState({ avatar }));
+      if (e.target.files[0]) {
+        toDataURL(e.target).then((avatar) => this.setState({ avatar }));
+      } else return;
     }
     // =======================================
     // select, input[type="text"], input[type="radio"], textarea
@@ -41,7 +44,13 @@ class TutorForm extends Component {
       <TutorFormContainer>
         <form className='tutorForm' onSubmit={this.onHandleSubmit}>
           <label className='tutorFormAvatarLabel'>
-            {this.state.avatar && <img src={this.state.avatar} alt='pic' />}
+            {this.state.avatar ? (
+              <img src={this.state.avatar} alt='pic' />
+            ) : (
+              <svg className='tutorFormAvatarIcon'>
+                <use href={sprite + "#icon-camera"} />
+              </svg>
+            )}
             <input
               type='file'
               name='avatar'

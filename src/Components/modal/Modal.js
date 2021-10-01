@@ -5,7 +5,7 @@ class Modal extends Component {
   state = {
     body: document.querySelector("body"),
   };
-  
+
   componentDidMount() {
     window.addEventListener("keydown", this.onHandleEscape);
     this.state.body.style.overflow = "hidden";
@@ -26,7 +26,5 @@ class Modal extends Component {
     );
   }
 }
-
-
 
 export default Modal;
