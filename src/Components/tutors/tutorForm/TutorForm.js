@@ -83,14 +83,15 @@ class TutorForm extends Component {
             Experience:
             <div className='tutorFormExperienceBlock'>
               {experience.map((item) => (
-                <label key={item}>
-                  {item}
+                <label key={item} className='tutorFormExperienceLabel'>
+                  <span className='tutorFormExperienceLabelTitle'>{item}</span>
                   <input
                     type='radio'
                     onChange={this.onHandleChange}
                     name='experience'
                     value={item}
-                    checked={this.state.experience === item} //true || false
+                    checked={this.state.experience === item}
+                    className='tutorFormExperienceRadio'
                   />
                 </label>
               ))}

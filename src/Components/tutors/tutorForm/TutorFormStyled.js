@@ -28,4 +28,16 @@ export const TutorFormContainer = styled.div`
     justify-content: space-evenly;
     margin: 10px 0;
   }
+  .tutorFormExperienceRadio {
+    width: 15px;
+    height: 15px;
+  }
+  .tutorFormExperienceLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .tutorFormExperienceLabelTitle {
+    margin-right: 10px;
+  }
 `;
