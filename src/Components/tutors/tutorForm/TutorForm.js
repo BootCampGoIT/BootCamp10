@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { TutorFormContainer } from "./TutorFormStyled";
 
 const levels = ["junior", "middle", "senior"];
-const experience = ["1 год", "3 года", "5 лет"];
+const experience = ["1 year", "3 years", "5 years"];
 
 const toDataURL = (element) => {
   return new Promise((resolve) => {
@@ -40,8 +40,14 @@ class TutorForm extends Component {
     return (
       <TutorFormContainer>
         <form className='tutorForm' onSubmit={this.onHandleSubmit}>
-          <label>
-            <input type='file' name='avatar' onChange={this.onHandleChange} />
+          <label className='tutorFormAvatarLabel'>
+            {this.state.avatar && <img src={this.state.avatar} alt='pic' />}
+            <input
+              type='file'
+              name='avatar'
+              onChange={this.onHandleChange}
+              className='tutorFormAvatarInput'
+            />
           </label>
 
           <label>
@@ -75,20 +81,22 @@ class TutorForm extends Component {
           </label>
           <label>
             Experience:
-            {experience.map((item) => (
-              <label key={item}>
-                {item}
-                <input
-                  type='radio'
-                  onChange={this.onHandleChange}
-                  name='experience'
-                  value={item}
-                  checked={this.state.experience === item} //true || false
-                />
-              </label>
-            ))}
+            <div className='tutorFormExperienceBlock'>
+              {experience.map((item) => (
+                <label key={item}>
+                  {item}
+                  <input
+                    type='radio'
+                    onChange={this.onHandleChange}
+                    name='experience'
+                    value={item}
+                    checked={this.state.experience === item} //true || false
+                  />
+                </label>
+              ))}
+            </div>
           </label>
-          <button type='submit'></button>
+          <button type='submit'>Save tutor</button>
         </form>
       </TutorFormContainer>
     );

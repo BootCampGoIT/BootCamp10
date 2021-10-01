@@ -1,36 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { GroupFormContainer } from "./GroupFormStyled";
 
 const students = ["Alex Ivanov", "Nikita Petrov", "Andrii Shnurkov"];
-// const tutors = ["Alex Ivanov", "Nikita Petrov"];
-// const mentors = ["Boris Hrevtsov", "Sergii Borisov"];
-// const titors = { tutor: "Viktor Dayneko", mentor: "Boris Shevcov" };
-const courses = [
-  {
-    id: "vhjgh4234234h",
-    name: "HTML/CSS",
-    avatar: "dgfhhgjj",
-    modules: ["dgfhjhj112", "fhgg12hj21"],
-  },
-  {
-    id: "fgnhgg324hg234",
-    name: "JavaScript",
-    avatar: "dgfhhgjj",
-    modules: ["dgfhjhj112", "fhgg12hj21"],
-  },
-];
-
-// state = {
-//     name: "BootCamp 10",
-//     members: ["-MkfI5jb9063fvkCeGGd", "dgjhgk213312z23", "gkhgh4gj2343423"],
-//     tutors: {
-//       tutor: "fgfg23423fgh4fg23f4g23",
-//       mentor: "53345vv35fdgcvhmgjhj",
-//     },
-//     courses: ["vhjgh4234234h", "fgnhgg324hg234"],
-//   };
 
 const initialState = {
   groupName: "",
@@ -59,9 +31,6 @@ class GroupsForm extends Component {
       .then((res) => this.props.addGroup({ ...this.state, id: res.data.name }))
       .catch((err) => console.log(err))
       .finally(() => this.setState({ ...initialState }));
-    // this.props.addGroup({ ...this.state, id: uuidv4() });
-
-    // get, post, put, patch, delete
   };
 
   toDataURL = (element) => {

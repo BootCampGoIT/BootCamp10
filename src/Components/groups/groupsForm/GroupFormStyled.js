@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 export const GroupFormContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.secondary};
   .groupsForm {
+    background-color: ${(props) => props.theme.colors.secondary};
     display: flex;
     flex-direction: column;
     max-width: 300px;
-    border: 1px solid black;
+    border: 1px solid ${(props) => props.theme.colors.main};
+    border-radius: 16px;
     padding: 10px;
   }
   .groupFormAvatarImage {

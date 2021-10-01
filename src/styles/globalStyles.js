@@ -48,6 +48,15 @@ input, select {
     margin: 8px 0;
    
 }
+textarea {
+    color: ${(props) => props.theme.colors.input};
+    border: 1px solid ${(props) => props.theme.colors.main};
+    padding: 12px;
+    border-radius: 16px;
+    outline: none;
+    width: 100%;
+    margin: 8px 0;
+}
 select:hover{
     cursor: pointer;
 }
