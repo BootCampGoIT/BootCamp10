@@ -30,8 +30,6 @@ button:hover {
 label {
     color: ${(props) => props.theme.colors.label};
     outline: none;
-    /* font-size: 16px; */
-    /* line-height: 25px; */
 }
 ul {
     list-style: none;

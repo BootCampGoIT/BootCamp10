@@ -1,12 +1,13 @@
 import React from "react";
+import { TutorsListContainer } from "./TutorsListStyled";
 
 const TutorsList = ({ tutors }) => {
   return (
-    <ul>
+    <TutorsListContainer>
       {tutors.map((tutor) => (
         <li key={tutor.id}>{tutor.name}</li>
       ))}
-    </ul>
+    </TutorsListContainer>
   );
 };
 

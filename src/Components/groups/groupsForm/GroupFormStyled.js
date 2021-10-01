@@ -63,6 +63,8 @@ export const GroupFormContainer = styled.div`
   .groupFormActiveGroupInput {
     width: 15px;
     height: 15px;
+    cursor: pointer;
+    
   }
   .groupFormActiveGroupTitle {
     margin-right: 10px;
