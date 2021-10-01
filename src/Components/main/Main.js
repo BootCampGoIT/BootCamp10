@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { Component } from "react";
 import CoursesForm from "../courses/coursesForm/CoursesForm";
 import CoursesList from "../courses/CoursesList";
-import GroupsForm from "../groups/GroupsForm";
+import GroupsForm from "../groups/groupsForm/GroupsForm";
+import GroupsList from "../groups/groupsList/GroupsList";
+
 import Section from "../section/Section";
 
 class Main extends Component {
@@ -53,6 +55,7 @@ class Main extends Component {
     this.state.groups.filter((group) =>
       group.groupName.toLowerCase().includes(this.state.filter.toLowerCase())
     );
+
   render() {
     return (
       <main>
@@ -71,16 +74,10 @@ class Main extends Component {
           />
         </label>
         <hr />
-        <ul>
-          {this.getFilteredGroups().map((group) => (
-            <li key={group.id}>
-              {group.groupName}
-              <button type='button' onClick={() => this.deleteGroup(group.id)}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        <GroupsList
+          groups={this.getFilteredGroups()}
+          deleteGroup={this.deleteGroup}
+        />
       </main>
     );
   }

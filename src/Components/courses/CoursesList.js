@@ -41,14 +41,6 @@ class CoursesList extends Component {
         {this.state.isCourseFormOpen && (
           <Modal>
             <CoursesForm />
-            <button type='button' onClick={this.toggleForm}>
-              Close
-            </button>
-            <button
-              type='button'
-              onClick={() => this.addCourse({ name: "TEST" })}>
-              Add course
-            </button>
           </Modal>
         )}
       </CoursesListStyled>

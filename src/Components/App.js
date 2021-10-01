@@ -5,7 +5,6 @@ import courses from "../data/main/courses.json";
 import GlobalStyles from "../styles/globalStyles";
 import { ThemeProvider } from "styled-components";
 import themes from "../themes";
-import GroupsForm from "./groups/GroupsForm";
 
 class App extends Component {
   state = {

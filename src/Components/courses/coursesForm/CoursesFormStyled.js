@@ -4,10 +4,9 @@ export const CourseFormContainer = styled.div`
   .courseForm {
     display: flex;
     flex-direction: column;
-    border: 1px solid lightgray;
     border-radius: 16px;
     padding: 5px;
-    background-color: lightsalmon;
+  
   }
 
   .courseFormLabel {
