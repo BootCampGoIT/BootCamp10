@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { GroupFormContainer } from "./GroupFormStyled";
 
 const students = ["Alex Ivanov", "Nikita Petrov", "Andrii Shnurkov"];
-const tutors = ["Alex Ivanov", "Nikita Petrov"];
-const mentors = ["Boris Hrevtsov", "Sergii Borisov"];
+// const tutors = ["Alex Ivanov", "Nikita Petrov"];
+// const mentors = ["Boris Hrevtsov", "Sergii Borisov"];
 // const titors = { tutor: "Viktor Dayneko", mentor: "Boris Shevcov" };
 const courses = [
   {
@@ -37,13 +37,17 @@ const initialState = {
   startDate: "",
   avatar: "",
   members: [],
-  tutor: tutors[0],
+  tutor: "",
   mentor: "",
   isActive: false,
 };
 
 class GroupsForm extends Component {
-  state = { ...initialState };
+  state = {
+    ...initialState,
+    tutor: this.props.tutors[0],
+    mentor: this.props.tutors[0],
+  };
 
   onHandleSubmit = (e) => {
     e.preventDefault();
@@ -149,9 +153,9 @@ class GroupsForm extends Component {
           <label>
             Tutor:
             <select name='tutor' onChange={this.onHandleChange}>
-              {tutors.map((tutor) => (
-                <option value={tutor} key={tutor}>
-                  {tutor}
+              {this.props.tutors.map((tutor) => (
+                <option value={tutor.name} key={tutor.id}>
+                  {tutor.name}
                 </option>
               ))}
             </select>
@@ -159,9 +163,9 @@ class GroupsForm extends Component {
           <label>
             Mentor:
             <select name='mentor' onChange={this.onHandleChange}>
-              {mentors.map((mentor) => (
-                <option value={mentor} key={mentor}>
-                  {mentor}
+              {this.props.tutors.map((mentor) => (
+                <option value={mentor.name} key={mentor.id}>
+                  {mentor.name}
                 </option>
               ))}
             </select>

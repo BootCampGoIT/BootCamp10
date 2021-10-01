@@ -1,20 +1,47 @@
 import axios from "axios";
 import React, { Component } from "react";
+import { addTutor, getTutors } from "../../services/tutors/tutorsAPI";
 import CoursesForm from "../courses/coursesForm/CoursesForm";
 import CoursesList from "../courses/CoursesList";
 import GroupsForm from "../groups/groupsForm/GroupsForm";
 import GroupsList from "../groups/groupsList/GroupsList";
 
 import Section from "../section/Section";
+import TutorForm from "../tutors/tutorForm/TutorForm";
+import TutorsList from "../tutors/tutorsList/TutorsList";
 
 class Main extends Component {
   state = {
     groups: [],
     courses: [],
     filter: "",
+    tutors: [],
+    error: "",
+    isLoading: false,
   };
 
-  componentDidMount() {
+  addNewTutor = async (tutor) => {
+    this.setState({ isLoading: true });
+    try {
+      const id = await addTutor(tutor);
+      this.setState((prev) => ({
+        tutors: [...prev.tutors, { ...tutor, id: id }],
+      }));
+    } catch (error) {
+      this.setState({ error: "Something went wrong!" });
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+
+  async componentDidMount() {
+    try {
+      const tutors = await getTutors();
+      if (tutors.length) {
+        this.setState({ tutors });
+      } else return;
+    } catch (error) {}
+
     axios
       .get("https://ited-fc7ac-default-rtdb.firebaseio.com/groups.json")
       .then((res) => {
@@ -59,11 +86,14 @@ class Main extends Component {
   render() {
     return (
       <main>
+        {this.state.isLoading && <h3>...loading</h3>}
+        <TutorForm addNewTutor={this.addNewTutor} />
+        <TutorsList tutors={this.state.tutors} />
         <Section title='CourseList'>
           <CoursesList courses={this.state.courses} />
         </Section>
 
-        <GroupsForm addGroup={this.addGroup} />
+        <GroupsForm addGroup={this.addGroup} tutors={this.state.tutors} />
         <hr />
         <label>
           Filter:
