@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { GroupFormContainer } from "./GroupFormStyled";
 import sprite from "../../../icons/main/sprite.svg";
@@ -13,33 +13,16 @@ const initialState = {
   tutor: "",
   mentor: "",
   isActive: false,
-  courses: [{}]
 };
 
-class GroupsForm extends Component {
-  state = {
+const GroupsForm = ({ tutors, addGroup, closeForm }) => {
+  const [state, setState] = useState({
     ...initialState,
-    tutor: this.props.tutors[0],
-    mentor: this.props.tutors[0],
-  };
+    tutor: tutors[0],
+    mentor: tutors[0],
+  });
 
-// this.setState({courses: [], fhgj: true})
-
-  onHandleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post(
-        `https://ited-fc7ac-default-rtdb.firebaseio.com/groups.json`,
-        this.state
-      )
-      .then((res) => {
-        this.props.addGroup({ ...this.state, id: res.data.name });
-        this.props.closeForm();
-      })
-      .catch((err) => console.log(err));
-  };
-
-  toDataURL = (element) => {
+  const toDataURL = (element) => {
     return new Promise((resolve) => {
       const reader = new FileReader(); //{}
       reader.onloadend = () => resolve(reader.result);
@@ -47,141 +30,150 @@ class GroupsForm extends Component {
     });
   };
 
-  onHandleChange = async (e) => {
+  const onHandleChange = async (e) => {
     const { value, name, type } = e.target;
     if (type === "file") {
-      const res = await this.toDataURL(e.target);
-      this.setState({ avatar: res });
+      const res = await toDataURL(e.target);
+      setState((prev) => ({ ...prev, avatar: res }));
       return;
     }
     if (type === "radio") {
-      this.setState((prev) => ({ isActive: !prev.isActive }));
+      setState((prev) => ({ ...prev, isActive: !prev.isActive }));
       return;
     }
-    this.setState({ [name]: value });
+    setState((prev) => ({ ...prev, [name]: value }));
   };
 
-  checkStudent = (e) => {
-    this.isUserChecked(e.target.name)
-      ? this.setState((prev) => ({
+  const onHandleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`https://ited-fc7ac-default-rtdb.firebaseio.com/groups.json`, state)
+      .then((res) => {
+        addGroup({ ...state, id: res.data.name });
+        closeForm();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const checkStudent = (e) => {
+    isUserChecked(e.target.name)
+      ? setState((prev) => ({
+          ...prev,
           members: prev.members.filter((student) => student !== e.target.name),
         }))
-      : this.setState((prev) => ({
+      : setState((prev) => ({
+          ...prev,
           members: [...prev.members, e.target.name],
         }));
   };
 
-  isUserChecked = (student) => {
-    return this.state.members.includes(student);
+  const isUserChecked = (student) => {
+    return state.members.includes(student);
   };
 
-  render() {
-    return (
-      <GroupFormContainer>
-        <form onSubmit={this.onHandleSubmit} className='groupsForm'>
-          <div className='groupFormAvatarImage'>
-            <label className='groupFormAvatarLabel'>
-              {this.state.avatar ? (
-                <img src={this.state.avatar} alt='pic' />
-              ) : (
-                <svg className='groupFormAvatarIcon'>
-                  <use href={sprite + "#icon-camera"} />
-                </svg>
-              )}
-              <input
-                type='file'
-                name='avatar'
-                onChange={this.onHandleChange}
-                className='groupFormAvatarInput'
-              />
-            </label>
-          </div>
+  return (
+    <GroupFormContainer>
+      <form onSubmit={onHandleSubmit} className='groupsForm'>
+        <div className='groupFormAvatarImage'>
+          <label className='groupFormAvatarLabel'>
+            {state.avatar ? (
+              <img src={state.avatar} alt='pic' />
+            ) : (
+              <svg className='groupFormAvatarIcon'>
+                <use href={sprite + "#icon-camera"} />
+              </svg>
+            )}
+            <input
+              type='file'
+              name='avatar'
+              onChange={onHandleChange}
+              className='groupFormAvatarInput'
+            />
+          </label>
+        </div>
 
-          <label>
-            Name:
-            <input
-              type='text'
-              name='groupName'
-              onChange={this.onHandleChange}
-              value={this.state.groupName}
-            />
-          </label>
-          <label>
-            StartDate:
-            <input
-              type='text'
-              name='startDate'
-              onChange={this.onHandleChange}
-              value={this.state.startDate}
-            />
-          </label>
-          <ul className='groupFormStudentsList'>
-            {students.map((student) => (
-              <li key={student}>
-                <label className='groupFormStudentsListLabel'>
-                  <span className='groupFormStudentsListTitle'>{student}</span>
-                  <input
-                    type='checkbox'
-                    name={student}
-                    checked={this.isUserChecked(student)}
-                    onChange={this.checkStudent}
-                    className='groupFormStudentsListInput'
-                  />
-                </label>
-              </li>
+        <label>
+          Name:
+          <input
+            type='text'
+            name='groupName'
+            onChange={onHandleChange}
+            value={state.groupName}
+          />
+        </label>
+        <label>
+          StartDate:
+          <input
+            type='text'
+            name='startDate'
+            onChange={onHandleChange}
+            value={state.startDate}
+          />
+        </label>
+        <ul className='groupFormStudentsList'>
+          {students.map((student) => (
+            <li key={student}>
+              <label className='groupFormStudentsListLabel'>
+                <span className='groupFormStudentsListTitle'>{student}</span>
+                <input
+                  type='checkbox'
+                  name={student}
+                  checked={isUserChecked(student)}
+                  onChange={checkStudent}
+                  className='groupFormStudentsListInput'
+                />
+              </label>
+            </li>
+          ))}
+        </ul>
+        <label>
+          Tutor:
+          <select name='tutor' onChange={onHandleChange}>
+            {tutors.map((tutor) => (
+              <option value={tutor.name} key={tutor.id}>
+                {tutor.name}
+              </option>
             ))}
-          </ul>
-          <label>
-            Tutor:
-            <select name='tutor' onChange={this.onHandleChange}>
-              {this.props.tutors.map((tutor) => (
-                <option value={tutor.name} key={tutor.id}>
-                  {tutor.name}
-                </option>
-              ))}
-            </select>
+          </select>
+        </label>
+        <label>
+          Mentor:
+          <select name='mentor' onChange={onHandleChange}>
+            {tutors.map((mentor) => (
+              <option value={mentor.name} key={mentor.id}>
+                {mentor.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <div className='groupFormActiveGroup'>
+          <label className='groupFormActiveGroupLabel'>
+            <span className='groupFormActiveGroupTitle'>Active</span>
+            <input
+              type='radio'
+              name='isActive'
+              checked={state.isActive}
+              onChange={onHandleChange}
+              className='groupFormActiveGroupInput'
+            />
           </label>
-          <label>
-            Mentor:
-            <select name='mentor' onChange={this.onHandleChange}>
-              {this.props.tutors.map((mentor) => (
-                <option value={mentor.name} key={mentor.id}>
-                  {mentor.name}
-                </option>
-              ))}
-            </select>
+          <label className='groupFormActiveGroupLabel'>
+            <span className='groupFormActiveGroupTitle'>Inactive</span>
+            <input
+              type='radio'
+              name='isActive'
+              checked={!state.isActive}
+              onChange={onHandleChange}
+              className='groupFormActiveGroupInput'
+            />
           </label>
-          <div className='groupFormActiveGroup'>
-            <label className='groupFormActiveGroupLabel'>
-              <span className='groupFormActiveGroupTitle'>Active</span>
-              <input
-                type='radio'
-                name='isActive'
-                checked={this.state.isActive}
-                onChange={this.onHandleChange}
-                className='groupFormActiveGroupInput'
-              />
-            </label>
-            <label className='groupFormActiveGroupLabel'>
-              <span className='groupFormActiveGroupTitle'>Inactive</span>
-              <input
-                type='radio'
-                name='isActive'
-                checked={!this.state.isActive}
-                onChange={this.onHandleChange}
-                className='groupFormActiveGroupInput'
-              />
-            </label>
-          </div>
-          <button
-            type='submit'
-            disabled={!(this.state.groupName && this.state.startDate)}>
-            Save group
-          </button>
-        </form>
-      </GroupFormContainer>
-    );
-  }
-}
+        </div>
+        <button type='submit' disabled={!(state.groupName && state.startDate)}>
+          Save group
+        </button>
+      </form>
+    </GroupFormContainer>
+  );
+};
 
 export default GroupsForm;

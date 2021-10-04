@@ -1,5 +1,6 @@
 import React from "react";
-import TutorLIstItem from "./tutorListItem/TutorLIstItem";
+import TutorLIstItem from "./tutorListItem/TutorListItem";
+
 import { TutorsListContainer } from "./TutorsListStyled";
 
 const TutorsList = ({ tutors, children = null }) => {

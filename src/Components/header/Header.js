@@ -84,17 +84,3 @@ class Header extends Component {
 }
 
 export default Header;
-
-// const myData = {
-//   hdghjhdgbjqhdghsa: { name: "HTML/CSS" },
-//   dssadasdasdsadasd: { name: "JavaScript" },
-//   dsfddsfasdasdsadasd: { name: "React" },
-// };
-
-// const obj = myData.hdghjhdgbjqhdghsa //{ name: "HTML/CSS" }
-
-// const keys = Object.keys(myData);
-// // ["hdghjhdgbjqhdghsa", "dssadasdasdsadasd", "dsfddsfasdasdsadasd"];
-// const arr = keys.map((key) => ({ id: key, ...myData[key] }));
-
-// // const arr = [{ id: "hdghjhdgbjqhdghsa", name: "HTML/CSS" }, { id: "hdghjhdgbjqhdghsa", name: "HTML/CSS" }, { id: "hdghjhdgbjqhdghsa", name: "HTML/CSS" }]

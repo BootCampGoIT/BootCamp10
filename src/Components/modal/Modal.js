@@ -1,30 +1,22 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { OverLay } from "./ModalStyled";
 
-class Modal extends Component {
-  state = {
-    body: document.querySelector("body"),
-  };
+const Modal = ({ toggleModal, children }) => {
+  useEffect(() => {
+    window.addEventListener("keydown", onHandleEscape);
+    const body = document.querySelector("body");
+    body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onHandleEscape);
+      const body = document.querySelector("body");
+      body.style.overflow = "auto";
+    };
+  });
 
-  componentDidMount() {
-    window.addEventListener("keydown", this.onHandleEscape);
-    this.state.body.style.overflow = "hidden";
-  }
-  componentWillUnmount() {
-    window.removeEventListener("keydown", this.onHandleEscape);
-    this.state.body.style.overflow = "auto";
-  }
+  const onHandleEscape = (e) => e.code === "Escape" && toggleModal();
 
-  onHandleEscape = (e) => e.code === "Escape" && this.props.toggleModal();
-
-  onOverlayClick = (e) =>
-    e.target === e.currentTarget && this.props.toggleModal();
-
-  render() {
-    return (
-      <OverLay onClick={this.onOverlayClick}>{this.props.children}</OverLay>
-    );
-  }
-}
+  const onOverlayClick = (e) => e.target === e.currentTarget && toggleModal();
+  return <OverLay onClick={onOverlayClick}>{children}</OverLay>;
+};
 
 export default Modal;

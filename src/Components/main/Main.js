@@ -4,6 +4,7 @@ import { addTutor, getTutors } from "../../services/tutors/tutorsAPI";
 import CoursesForm from "../courses/coursesForm/CoursesForm";
 import GroupsForm from "../groups/groupsForm/GroupsForm";
 import GroupsList from "../groups/groupsList/GroupsList";
+import Hooks from "../hooks/Hooks";
 import Modal from "../modal/Modal";
 import AddItem from "../reusableComponents/addItem/AddItem";
 
@@ -21,6 +22,10 @@ class Main extends Component {
     isLoading: false,
     isGroupFormOpen: false,
     isTutorFormOpen: false,
+  };
+
+  addCourse = (course) => {
+    this.setState((prev) => ({ courses: [...prev.courses, course] }));
   };
 
   async componentDidMount() {
@@ -101,11 +106,13 @@ class Main extends Component {
   render() {
     return (
       <main>
-        {this.state.isLoading && <h3>...loading</h3>}
+        {/* <CoursesForm addCourse={this.addCourse} /> */}
+        {/* <Hooks /> */}
+        {/* {this.state.isLoading && <h3>...loading</h3>} */}
         {/* ========== tutors ============== */}
         <Section title='Tutors'>
           <TutorsList tutors={this.state.tutors}>
-            <AddItem openForm={this.toggleGroupForm} />
+            <AddItem openForm={this.toggleTutorForm} />
           </TutorsList>
           {this.state.isTutorFormOpen && (
             <Modal toggleModal={this.toggleTutorForm}>
@@ -113,14 +120,13 @@ class Main extends Component {
             </Modal>
           )}
         </Section>
-        <CoursesForm />
         {/* ========== courses ================= */}
         {/* <Section title='CourseList'>
           <CoursesList courses={this.state.courses} />
         </Section> */}
 
         {/*============= groups ============= */}
-        <hr />
+        {/* <hr />
         <label>
           Filter:
           <input
@@ -145,7 +151,7 @@ class Main extends Component {
               />
             </Modal>
           )}
-        </Section>
+        </Section> */}
       </main>
     );
   }

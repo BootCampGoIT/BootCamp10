@@ -25,6 +25,13 @@ export const TutorListItemContainer = styled.li`
   .tutorListItemDetailsButton {
     margin-top: 10px;
   }
+
+  .active {
+    background-color: red;
+  }
+  .inActive {
+    background-color: green;
+  }
   @media (min-width: 768px) {
     width: 25%;
   }

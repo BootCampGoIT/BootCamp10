@@ -1,7 +1,8 @@
 import React from "react";
-import ModuleList from "../moduleList/ModuleList";
+
 import { CourseListItemContainer } from "./CoursesListItemStyled";
-const CoursesListItem = ({ modules, name }) => {
+
+const CoursesListItem = ({  name }) => {
   return (
     <CourseListItemContainer>
       <div className='courseListItemContent'>
@@ -9,7 +10,6 @@ const CoursesListItem = ({ modules, name }) => {
           <p className='courseListItemTitle'>{name}</p>
         </div>
       </div>
-      {/* <ModuleList modules={modules} /> */}
     </CourseListItemContainer>
   );
 };
