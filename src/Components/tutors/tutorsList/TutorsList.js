@@ -1,4 +1,5 @@
 import React from "react";
+import TutorLIstItem from "./tutorListItem/TutorLIstItem";
 import { TutorsListContainer } from "./TutorsListStyled";
 
 const TutorsList = ({ tutors, children = null }) => {
@@ -6,7 +7,7 @@ const TutorsList = ({ tutors, children = null }) => {
     <TutorsListContainer>
       {children}
       {tutors.map((tutor) => (
-        <li key={tutor.id}>{tutor.name}</li>
+        <TutorLIstItem tutor={tutor} key={tutor.id} />
       ))}
     </TutorsListContainer>
   );

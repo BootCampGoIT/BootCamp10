@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { Component } from "react";
 import { addTutor, getTutors } from "../../services/tutors/tutorsAPI";
 import CoursesForm from "../courses/coursesForm/CoursesForm";
-import CoursesList from "../courses/CoursesList";
 import GroupsForm from "../groups/groupsForm/GroupsForm";
 import GroupsList from "../groups/groupsList/GroupsList";
 import Modal from "../modal/Modal";
@@ -21,24 +20,7 @@ class Main extends Component {
     error: "",
     isLoading: false,
     isGroupFormOpen: false,
-  };
-
-  toggleGroupForm = () => {
-    this.setState((prev) => ({ isGroupFormOpen: !prev.isGroupFormOpen }));
-  };
-
-  addNewTutor = async (tutor) => {
-    this.setState({ isLoading: true });
-    try {
-      const id = await addTutor(tutor);
-      this.setState((prev) => ({
-        tutors: [...prev.tutors, { ...tutor, id: id }],
-      }));
-    } catch (error) {
-      this.setState({ error: "Something went wrong!" });
-    } finally {
-      this.setState({ isLoading: false });
-    }
+    isTutorFormOpen: false,
   };
 
   async componentDidMount() {
@@ -68,6 +50,30 @@ class Main extends Component {
       });
   }
 
+  // =========== tutors ==============
+  toggleTutorForm = () => {
+    this.setState((prev) => ({ isTutorFormOpen: !prev.isTutorFormOpen }));
+  };
+
+  addNewTutor = async (tutor) => {
+    this.setState({ isLoading: true });
+    try {
+      const id = await addTutor(tutor);
+      this.setState((prev) => ({
+        tutors: [...prev.tutors, { ...tutor, id: id }],
+      }));
+    } catch (error) {
+      this.setState({ error: "Something went wrong!" });
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
+
+  // =========== groups =============
+  toggleGroupForm = () => {
+    this.setState((prev) => ({ isGroupFormOpen: !prev.isGroupFormOpen }));
+  };
+
   addGroup = (group) =>
     this.setState((prev) => ({ groups: [...prev.groups, group] }));
 
@@ -84,6 +90,8 @@ class Main extends Component {
       .catch((err) => console.log(err));
   };
 
+  // ======= groups filter =============
+
   setFilter = (e) => this.setState({ filter: e.target.value });
   getFilteredGroups = () =>
     this.state.groups.filter((group) =>
@@ -94,12 +102,24 @@ class Main extends Component {
     return (
       <main>
         {this.state.isLoading && <h3>...loading</h3>}
-        <TutorForm addNewTutor={this.addNewTutor} />
-        <TutorsList tutors={this.state.tutors} />
-        <Section title='CourseList'>
-          <CoursesList courses={this.state.courses} />
+        {/* ========== tutors ============== */}
+        <Section title='Tutors'>
+          <TutorsList tutors={this.state.tutors}>
+            <AddItem openForm={this.toggleGroupForm} />
+          </TutorsList>
+          {this.state.isTutorFormOpen && (
+            <Modal toggleModal={this.toggleTutorForm}>
+              <TutorForm addNewTutor={this.addNewTutor} />
+            </Modal>
+          )}
         </Section>
+        <CoursesForm />
+        {/* ========== courses ================= */}
+        {/* <Section title='CourseList'>
+          <CoursesList courses={this.state.courses} />
+        </Section> */}
 
+        {/*============= groups ============= */}
         <hr />
         <label>
           Filter:
@@ -110,20 +130,22 @@ class Main extends Component {
           />
         </label>
         <hr />
-        <GroupsList
-          groups={this.getFilteredGroups()}
-          deleteGroup={this.deleteGroup}>
-          <AddItem openForm={this.toggleGroupForm} />
-        </GroupsList>
-        {this.state.isGroupFormOpen && (
-          <Modal toggleModal={this.toggleGroupForm}>
-            <GroupsForm
-              addGroup={this.addGroup}
-              tutors={this.state.tutors}
-              closeForm={this.toggleGroupForm}
-            />
-          </Modal>
-        )}
+        <Section title='Groups'>
+          <GroupsList
+            groups={this.getFilteredGroups()}
+            deleteGroup={this.deleteGroup}>
+            <AddItem openForm={this.toggleGroupForm} />
+          </GroupsList>
+          {this.state.isGroupFormOpen && (
+            <Modal toggleModal={this.toggleGroupForm}>
+              <GroupsForm
+                addGroup={this.addGroup}
+                tutors={this.state.tutors}
+                closeForm={this.toggleGroupForm}
+              />
+            </Modal>
+          )}
+        </Section>
       </main>
     );
   }

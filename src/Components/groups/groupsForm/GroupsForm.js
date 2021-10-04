@@ -13,6 +13,7 @@ const initialState = {
   tutor: "",
   mentor: "",
   isActive: false,
+  courses: [{}]
 };
 
 class GroupsForm extends Component {
@@ -21,6 +22,8 @@ class GroupsForm extends Component {
     tutor: this.props.tutors[0],
     mentor: this.props.tutors[0],
   };
+
+// this.setState({courses: [], fhgj: true})
 
   onHandleSubmit = (e) => {
     e.preventDefault();

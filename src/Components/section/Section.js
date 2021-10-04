@@ -1,14 +1,13 @@
-import styles from "./Section.module.css";
+import { SectionContainer } from "./SectionStyled";
 
 const Section = (props) => {
   const { title, children, theme = "light" } = props;
 
   return (
-    <section
-      className={theme === "dark" ? styles.darkBorder : styles.lightBorder}>
-      <h2 className={styles.sectionTitle}>{title}</h2>
+    <SectionContainer>
+      <h2 className='sectionTitle'>{title}</h2>
       {children}
-    </section>
+    </SectionContainer>
   );
 };
 

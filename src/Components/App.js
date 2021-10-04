@@ -39,27 +39,3 @@ class App extends Component {
 
 export default App;
 
-// const themeColors = {
-//   light: {
-//     title: "light",
-//     colors: {},
-//   },
-//   dark: {
-//     title: "dark",
-//     colors: {},
-//   },
-// };
-
-// {
-//   getName();
-//   function getName() {
-//     console.log("Hello");
-//   }
-// }
-
-// const changeTheme = (currentTheme) => {
-//   console.log(themeColors[currentTheme]);
-// };
-
-// changeTheme("light");
-// changeTheme("dark");

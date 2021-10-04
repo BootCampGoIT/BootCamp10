@@ -1,13 +1,13 @@
 import React from "react";
 import { CourseFormContainer } from "./CoursesFormStyled";
-
+import styles from "./Coures.module.css";
 
 const CoursesForm = () => {
   return (
     <CourseFormContainer>
       <form className='courseForm'>
         <label className='courseFormLabel'>
-          Name
+          <span className={styles.test}> Name</span>
           <input type='text' />
         </label>
         <label className='courseFormLabel'>
