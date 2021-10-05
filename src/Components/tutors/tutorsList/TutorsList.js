@@ -1,5 +1,6 @@
 import React from "react";
-import TutorLIstItem from "./tutorListItem/TutorListItem";
+import withToggle from "../../hoc/withToggle";
+import TutorListItem from "./tutorListItem/TutorListItem";
 
 import { TutorsListContainer } from "./TutorsListStyled";
 
@@ -8,10 +9,10 @@ const TutorsList = ({ tutors, children = null }) => {
     <TutorsListContainer>
       {children}
       {tutors.map((tutor) => (
-        <TutorLIstItem tutor={tutor} key={tutor.id} />
+        <TutorListItem tutor={tutor} key={tutor.id} />
       ))}
     </TutorsListContainer>
   );
 };
 
-export default TutorsList;
+export default withToggle(TutorsList);

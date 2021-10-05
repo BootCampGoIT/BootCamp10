@@ -1,7 +1,8 @@
 import React from "react";
+import withState from "../../../hoc/withState";
 import { TutorListItemContainer } from "./TutorListItemStyled";
 
-const TutorLIstItem = ({ tutor }) => {
+const TutorListItem = ({ tutor }) => {
   return (
     <TutorListItemContainer>
       <div className='tutorListItemWrapper'>
@@ -12,4 +13,6 @@ const TutorLIstItem = ({ tutor }) => {
   );
 };
 
-export default TutorLIstItem;
+export default withState(
+  "https://ited-fc7ac-default-rtdb.firebaseio.com/tutors/"
+)(TutorListItem);

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { GroupFormContainer } from "./GroupFormStyled";
 import sprite from "../../../icons/main/sprite.svg";
+import { LanguageContext } from "../../App";
 
 const students = ["Alex Ivanov", "Nikita Petrov", "Andrii Shnurkov"];
 
@@ -16,6 +17,7 @@ const initialState = {
 };
 
 const GroupsForm = ({ tutors, addGroup, closeForm }) => {
+  const { language } = useContext(LanguageContext);
   const [state, setState] = useState({
     ...initialState,
     tutor: tutors[0],
@@ -93,7 +95,7 @@ const GroupsForm = ({ tutors, addGroup, closeForm }) => {
         </div>
 
         <label>
-          Name:
+          {language.groupForm.name}:
           <input
             type='text'
             name='groupName'
@@ -102,7 +104,7 @@ const GroupsForm = ({ tutors, addGroup, closeForm }) => {
           />
         </label>
         <label>
-          StartDate:
+          {language.groupForm.startDate}:
           <input
             type='text'
             name='startDate'
@@ -127,7 +129,7 @@ const GroupsForm = ({ tutors, addGroup, closeForm }) => {
           ))}
         </ul>
         <label>
-          Tutor:
+          {language.groupForm.tutor}:
           <select name='tutor' onChange={onHandleChange}>
             {tutors.map((tutor) => (
               <option value={tutor.name} key={tutor.id}>
@@ -137,7 +139,7 @@ const GroupsForm = ({ tutors, addGroup, closeForm }) => {
           </select>
         </label>
         <label>
-          Mentor:
+          {language.groupForm.mentor}:
           <select name='mentor' onChange={onHandleChange}>
             {tutors.map((mentor) => (
               <option value={mentor.name} key={mentor.id}>
@@ -169,7 +171,7 @@ const GroupsForm = ({ tutors, addGroup, closeForm }) => {
           </label>
         </div>
         <button type='submit' disabled={!(state.groupName && state.startDate)}>
-          Save group
+          {language.groupForm.saveButton}
         </button>
       </form>
     </GroupFormContainer>

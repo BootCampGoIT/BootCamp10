@@ -1,33 +1,33 @@
 export const x = 10;
 export const mainRoutes = [
   {
-    name: "Home",
+    name: "home",
     path: "/",
     icon: "",
   },
   {
-    name: "Courses",
+    name: "courses",
     path: "/courses",
     icon: "",
   },
   {
-    name: "Groups",
+    name: "groups",
     path: "/groups",
     icon: "",
   },
-  {
-    name: "Admin",
-    path: "/admin",
-    icon: "",
-  },
-  {
-    name: "Sign up",
-    path: "/signup",
-    icon: "",
-  },
-  {
-    name: "Sign in",
-    path: "/signin",
-    icon: "",
-  },
+  // {
+  //   name: "Admin",
+  //   path: "/admin",
+  //   icon: "",
+  // },
+  // {
+  //   name: "Sign up",
+  //   path: "/signup",
+  //   icon: "",
+  // },
+  // {
+  //   name: "Sign in",
+  //   path: "/signin",
+  //   icon: "",
+  // },
 ];

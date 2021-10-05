@@ -5,6 +5,8 @@ import { HeaderContainer } from "./HeaderStyled";
 import sprite from "../../icons/header/sprite.svg";
 import Modal from "../modal/Modal";
 import CoursesForm from "../courses/coursesForm/CoursesForm";
+import withState from "../hoc/withState";
+import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
 
 class Header extends Component {
   state = {
@@ -52,6 +54,7 @@ class Header extends Component {
                     onClick={this.props.changeTheme}>
                     Change theme
                   </button>
+                  <LanguageSwitcher />
                 </div>
               </Modal>
             )}
@@ -72,6 +75,7 @@ class Header extends Component {
                       onClick={this.props.changeTheme}>
                       Change theme
                     </button>
+                    <LanguageSwitcher />
                   </div>
                 </div>
               </Modal>

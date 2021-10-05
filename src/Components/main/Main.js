@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { addTutor, getTutors } from "../../services/tutors/tutorsAPI";
+import { Context } from "../App";
 import CoursesForm from "../courses/coursesForm/CoursesForm";
 import GroupsForm from "../groups/groupsForm/GroupsForm";
 import GroupsList from "../groups/groupsList/GroupsList";
+import Toggler from "../hoc/Toggler";
 import Hooks from "../hooks/Hooks";
 import Modal from "../modal/Modal";
 import AddItem from "../reusableComponents/addItem/AddItem";
@@ -106,11 +108,26 @@ class Main extends Component {
   render() {
     return (
       <main>
+        {/* <Context.Consumer>
+          {(sadasdasdasd) => <h2>{sadasdasdasd}</h2>}
+        </Context.Consumer> */}
+        {/* <Toggler>
+          {({ isOpen, onToggle }) => (
+            <>
+              <button type='button' onClick={onToggle}>
+                Click
+              </button>
+              {isOpen && <p>Etiam feugiat lorem non metus.</p>}
+            </>
+          )}
+        </Toggler> */}
+
+        {/* ========================== */}
         {/* <CoursesForm addCourse={this.addCourse} /> */}
         {/* <Hooks /> */}
         {/* {this.state.isLoading && <h3>...loading</h3>} */}
         {/* ========== tutors ============== */}
-        <Section title='Tutors'>
+        {/* <Section title='Tutors'>
           <TutorsList tutors={this.state.tutors}>
             <AddItem openForm={this.toggleTutorForm} />
           </TutorsList>
@@ -119,14 +136,14 @@ class Main extends Component {
               <TutorForm addNewTutor={this.addNewTutor} />
             </Modal>
           )}
-        </Section>
+        </Section> */}
         {/* ========== courses ================= */}
         {/* <Section title='CourseList'>
           <CoursesList courses={this.state.courses} />
         </Section> */}
 
         {/*============= groups ============= */}
-        {/* <hr />
+        <hr />
         <label>
           Filter:
           <input
@@ -136,7 +153,7 @@ class Main extends Component {
           />
         </label>
         <hr />
-        <Section title='Groups'>
+        <Section title='groups'>
           <GroupsList
             groups={this.getFilteredGroups()}
             deleteGroup={this.deleteGroup}>
@@ -151,7 +168,7 @@ class Main extends Component {
               />
             </Modal>
           )}
-        </Section> */}
+        </Section>
       </main>
     );
   }
