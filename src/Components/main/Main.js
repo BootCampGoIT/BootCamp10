@@ -13,6 +13,9 @@ import AddItem from "../reusableComponents/addItem/AddItem";
 import Section from "../section/Section";
 import TutorForm from "../tutors/tutorForm/TutorForm";
 import TutorsList from "../tutors/tutorsList/TutorsList";
+import { Switch, Route } from "react-router-dom";
+import { mainRoutes } from "../../routes/mainRoutes";
+import DetailsPage from "../../pages/DetailsPage";
 
 class Main extends Component {
   state = {
@@ -106,8 +109,32 @@ class Main extends Component {
     );
 
   render() {
+    const methods = {
+      getFilteredGroups: this.getFilteredGroups,
+      setFilter: this.setFilter,
+      deleteGroup: this.deleteGroup,
+      addGroup: this.addGroup,
+      toggleGroupForm: this.toggleGroupForm,
+      addNewTutor: this.addNewTutor,
+      toggleTutorForm: this.toggleTutorForm,
+      addCourse: this.addCourse,
+    };
     return (
       <main>
+        <Switch>
+          {mainRoutes.map(({ exact, path, component: MyComponent }) => (
+            <Route
+              exact={exact}
+              path={path}
+              // component={route.component}
+              render={(
+                props //history, location, match
+              ) => <MyComponent {...this.state} {...props} methods={methods} />}
+              key={path}
+            />
+          ))}
+        </Switch>
+
         {/* <Context.Consumer>
           {(sadasdasdasd) => <h2>{sadasdasdasd}</h2>}
         </Context.Consumer> */}
@@ -143,7 +170,7 @@ class Main extends Component {
         </Section> */}
 
         {/*============= groups ============= */}
-        <hr />
+        {/* <hr />
         <label>
           Filter:
           <input
@@ -168,7 +195,7 @@ class Main extends Component {
               />
             </Modal>
           )}
-        </Section>
+        </Section> */}
       </main>
     );
   }

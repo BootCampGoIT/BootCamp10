@@ -16,4 +16,7 @@ export const NavigationContainer = styled.nav`
       color: ${(props) => props.theme.colors.active};
     }
   }
+  .activeNavLink {
+    color: ${(props) => props.theme.colors.active};
+  }
 `;

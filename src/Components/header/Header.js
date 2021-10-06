@@ -7,6 +7,7 @@ import Modal from "../modal/Modal";
 import CoursesForm from "../courses/coursesForm/CoursesForm";
 import withState from "../hoc/withState";
 import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   state = {
@@ -32,9 +33,9 @@ class Header extends Component {
     const { width, breakpoint } = this.state;
     return (
       <HeaderContainer>
-        <a href='/#' className='headerLogo'>
+        <Link to='/' className='headerLogo'>
           ITED
-        </a>
+        </Link>
         {width >= breakpoint ? (
           <div className='navigationWrapper'>
             <Navigation routes={mainRoutes} />

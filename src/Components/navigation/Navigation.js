@@ -1,18 +1,23 @@
-import React, { useContext } from "react";
-import { LanguageContext } from "../App";
+import React from "react";
+
+import { NavLink, useLocation } from "react-router-dom";
 
 import { NavigationContainer } from "./NavigationStyled";
 
-const Navigation = ({ routes }) => {
-  const { language } = useContext(LanguageContext);
+const Navigation = ({ routes, match = "" }) => {
+  const location = useLocation();
   return (
     <NavigationContainer>
       <ul className='navList'>
-        {routes.map(({ path, name }) => (
+        {routes.map(({ path, name, exact }) => (
           <li key={path} className='navItem'>
-            <a href={path} className='navLink'>
-              {language.navigation[name]}
-            </a>
+            <NavLink
+              to={{ pathname: match + path , state: { from: location.pathname } }}
+              className='navLink'
+              activeClassName='activeNavLink'
+              exact={exact}>
+              {name}
+            </NavLink>
           </li>
         ))}
       </ul>
